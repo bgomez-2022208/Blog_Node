@@ -1,13 +1,7 @@
 import { Router } from "express";
 import { check } from "express-validator";
 
-import {
-    //createComentary
-} from "./comments.controller.js";
-
-import {
-    ExistenteBlog
-} from "../helpers/db-validators.js"
+import { createComentary} from "./comments.controller.js";
 
 import { validarCampos } from "../middlewares/validar-campos.js"
 
@@ -16,7 +10,11 @@ const router = Router();
 router.post(
     "/",
     [
-        check("")
+        check('autor', 'This autor is void').not().isEmpty(),
+        check('comentary','This comentary is void').not().isEmpty(),
+        validarCampos,
     ],
-    createComments
+    createComentary
 );
+
+export default router;

@@ -5,12 +5,17 @@ const ComentarioSchema = mongoose.Schema({
       type: String,
       required: [true, "The comentary is required"],
     },
+    autor: {
+      type: String,
+      required: [true, "autor is mandatory"],
+      unique: true,
+    },
+    state: {
+      type: Boolean,
+      default: true
+    },
 });
 
-ComentarioSchema.methods.toJSON = function(){
-    const{ __v, _id, ...comentario} = this.toObject();
-    comentario.uid = _id;
-    return comentario;
-};
+
 
 export default mongoose.model('Comentario', ComentarioSchema);
